@@ -1,3 +1,3 @@
-export const jokeTypes = {
-    DELETE_JOKE: 'DELETE_JOKE'
+export const tableTypes = {
+    SELECT_BOX: 'SELECT_BOX'
 }

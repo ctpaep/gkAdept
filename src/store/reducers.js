@@ -1,29 +1,40 @@
-import { jokeTypes } from './types'
+import { tableTypes } from './types'
+import demoUsers from '../api/demoUsers.json'
+import demoCompany from '../api/demoCompany.json'
 
 const initState = {
-    jokes: [
-        {
-            id: 'ewe123rwsdf',
-            value:
-                'When Bruce Banner gets mad,he turns into the Hulk. When Chuck Norris gets mad,the Hulk turns and runs.',
-        },
-        {
-            id: 'ewerw344sff',
-            value: 'Chuck Norris can make you evacuate your bowels with a high five.',
-        },
-        {
-            id: 'ewe555rwscv',
-            value:
-                'Chuck Norris can drive a frieght train, trim his toenails and butcher a steer at the same time time.',
-        },
-    ]
+    company: demoCompany,
+    employees: demoUsers,
+    selectCompany: [],
+    selectUser: []
+
 }
 
 export const reducers = (state = initState, action) => {
     switch (action.type) {
-        case jokeTypes.DELETE_JOKE:
-            const filteredJokes = state.jokes.filter(joke => joke.id !== action.payload.id);
-            return { ...state, jokes: filteredJokes };
+        // case jokeTypes.DELETE_JOKE:
+        //     const filteredJokes = state.jokes.filter(joke => joke.id !== action.payload.id);
+        //     return { ...state, jokes: filteredJokes };
+        case tableTypes.SELECT_BOX:
+            if (action.payload.nameType === 'company') {
+                let indexArr = state.selectCompany.indexOf(action.payload.id)
+                console.log('indexArr: ', indexArr);
+            
+                if (indexArr >= 0) {
+                    console.log(`Такой элемент существует под индексом ${indexArr}`);
+                    const deleteSelect = state.selectCompany.filter(el => el !== action.payload.id);
+                    console.log('deleteSelect: ', deleteSelect);
+
+                    return { ...state, selectCompany: deleteSelect };
+                } else {
+                    return { ...state, selectCompany: [...state.selectCompany, action.payload.id] };
+
+                }
+            }
+            if (action.payload.nameType === 'employee') {
+                return { ...state, selectUser: [...state.selectUser, action.payload.id] };
+            }
+
 
         default:
             return state;

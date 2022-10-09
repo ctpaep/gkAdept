@@ -1,3 +1,3 @@
-import { jokeTypes } from './types'
+import { tableTypes } from './types'
 
-export const deleteJoke = (id) => ({ type: jokeTypes.DELETE_JOKE, payload: { id } });
+export const selectBox = (nameType, id) => ({ type: tableTypes.SELECT_BOX, payload: { nameType, id } });
