@@ -1,16 +1,19 @@
-import React from 'react'
 import Inpit from '../Inpit'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectAll } from '../../store/actions'
 
 export default function TableUser(props) {
-	const userRedux = useSelector((store) => store.employees)
+	const userRedux = useSelector((store) => store.employee)
 	const selectCompany = useSelector((store) => store.selectCompany)
+	const sortArr = selectCompany.sort((a, b) => a - b)
+	const dispatch = useDispatch()
+
 	return (
 		<div>
 			<table className="table">
 				<thead>
 					<tr>
-						<th>Выбрать</th>
+						<th onClick={() => { dispatch(selectAll('employee')) }}>Выделить все</th>
 						<th>Фамилия</th>
 						<th>Имя</th>
 						<th>Должность</th>
@@ -18,12 +21,9 @@ export default function TableUser(props) {
 				</thead>
 				<tbody>
 					{userRedux.length && userRedux.map((el) => (
-						selectCompany.map((element)=>{
-							// console.log("el", el);
-							// console.log("element", element);
+						sortArr.map((element) => {
 							if (el.company_Id === element) {
-								console.log("worl", el.last_name, el.last_name, el.position);
-								<Inpit key={el.company_Id} nameType = {'employee'} row0={el.id} row1={el.last_name} row2={el.first_name} row3={el.position} />
+								return <Inpit key={el.company_Id} nameType={'employee'} row0={el.id} row1={el.last_name} row2={el.first_name} row3={el.position} />
 							}
 						})
 					))}

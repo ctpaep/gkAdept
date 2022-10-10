@@ -3,39 +3,46 @@
 }
 
 .table {
-	width: 100%;
-	border: none;
-	margin-bottom: 20px;
+  width: 100%;
+  border: none;
+  margin-bottom: 20px;
 }
+
 .table thead th {
-	font-weight: bold;
-	text-align: left;
-	border: none;
-	padding: 10px 15px;
-	background: #d8d8d8;
-	font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  border: none;
+  padding: 10px 15px;
+  background: #d8d8d8;
+  font-size: 14px;
 }
+
 .table thead tr th:first-child {
-	border-radius: 8px 0 0 8px;
+  border-radius: 8px 0 0 8px;
 }
+
 .table thead tr th:last-child {
-	border-radius: 0 8px 8px 0;
+  border-radius: 0 8px 8px 0;
 }
+
 .table tbody td {
-	text-align: left;
-	border: none;
-	padding: 10px 15px;
-	font-size: 14px;
-	vertical-align: top;
+  text-align: left;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  vertical-align: top;
 }
-.table tbody tr:nth-child(even){
-	background: #f3f3f3;
+
+.table tbody tr:nth-child(even) {
+  background: #f3f3f3;
 }
+
 .table tbody tr td:first-child {
-	border-radius: 8px 0 0 8px;
+  border-radius: 8px 0 0 8px;
 }
+
 .table tbody tr td:last-child {
-	border-radius: 0 8px 8px 0;
+  border-radius: 0 8px 8px 0;
 }
 
 
@@ -59,22 +66,29 @@
   flex-flow: row nowrap;
   justify-content: center;
   height: 100px;
- }
- .row {
+}
+
+.row {
   margin: 20px;
   padding: 5px;
   flex: 0 1 auto;
- }
+}
 
- @media (prefers-reduced-motion: no-preference) {
+table tbody tr.inputCheck.active {
+  background-color: rgb(160, 151, 231);
+}
+
+@media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

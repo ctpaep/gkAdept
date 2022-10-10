@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import {selectBox} from '.././store/actions'
+import { nameTypes } from '../store/reducers';
+
 
 
 export default function Inpit(props) {
+  const selectItems = useSelector((store) =>store[nameTypes[props.nameType]])
   const dispatch = useDispatch()
-  let {nameType, row0, row1, row2, row3} = props
-  
+  const {nameType, row0, row1, row2, row3} = props
+  const selected = selectItems.includes(row0)
   return (
-     <tr>
-        <td><input onClick={()=>{dispatch(selectBox(nameType, row0))}} type="checkbox" name="a" value={`${row0}`} /></td>
+     <tr className={`inputCheck ${selected ? "active" : "" }`}>
+        <td><input  onChange={()=>{dispatch(selectBox(nameType, row0))}} checked={selected} type="checkbox"  name="a" value={`${row0}`} /></td>
         <td>{row1}</td>
         <td>{row2}</td>
         <td>{row3}</td>

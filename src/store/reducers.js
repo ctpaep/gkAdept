@@ -4,37 +4,44 @@ import demoCompany from '../api/demoCompany.json'
 
 const initState = {
     company: demoCompany,
-    employees: demoUsers,
+    employee: demoUsers,
     selectCompany: [],
     selectUser: []
 
 }
+export const nameTypes = {
+    company: 'selectCompany',
+    employee: 'selectUser'
+}
+
 
 export const reducers = (state = initState, action) => {
+    const nameType = action?.payload?.nameType
+    const selectNameType = nameTypes[nameType]
     switch (action.type) {
-        // case jokeTypes.DELETE_JOKE:
-        //     const filteredJokes = state.jokes.filter(joke => joke.id !== action.payload.id);
-        //     return { ...state, jokes: filteredJokes };
         case tableTypes.SELECT_BOX:
-            if (action.payload.nameType === 'company') {
-                let indexArr = state.selectCompany.indexOf(action.payload.id)
-                console.log('indexArr: ', indexArr);
-            
-                if (indexArr >= 0) {
-                    console.log(`Такой элемент существует под индексом ${indexArr}`);
-                    const deleteSelect = state.selectCompany.filter(el => el !== action.payload.id);
-                    console.log('deleteSelect: ', deleteSelect);
 
-                    return { ...state, selectCompany: deleteSelect };
-                } else {
-                    return { ...state, selectCompany: [...state.selectCompany, action.payload.id] };
+            let indexArr = state[selectNameType].indexOf(action.payload.id)
 
-                }
-            }
-            if (action.payload.nameType === 'employee') {
-                return { ...state, selectUser: [...state.selectUser, action.payload.id] };
+            if (indexArr >= 0) {
+                console.log(`Такой элемент существует под индексом ${indexArr}`);
+                const deleteSelect = state[selectNameType].filter(el => el !== action.payload.id);
+
+                return { ...state, [selectNameType]: deleteSelect };
+            } else {
+                return { ...state, [selectNameType]: [...state[selectNameType], action.payload.id] };
+
             }
 
+
+        case tableTypes.SELECT_ALL:
+            if (state[selectNameType].length === 0) {
+
+                const selectAll = state[action.payload.nameType].map(el => el.id);
+                return { ...state, [selectNameType]: selectAll };
+            } else {
+                return { ...state, [selectNameType]: [] };
+            }
 
         default:
             return state;

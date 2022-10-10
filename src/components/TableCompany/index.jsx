@@ -1,10 +1,11 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectAll } from '../../store/actions'
 import { onDelete } from '../../helpers/editInput'
 import Inpit from '../Inpit'
 
 export default function TableCompany(props) {
-    onDelete()
+    const dispatch = useDispatch()
     const companyRedux = useSelector((store) => store.company)
 
     return (
@@ -12,16 +13,16 @@ export default function TableCompany(props) {
             <table className="table">
                 <thead>
                     <tr>
-                        <th>Выбрать</th>
+                        <th onClick={() => { dispatch(selectAll('company')) }}>Выделить все</th>
                         <th>Название компании</th>
                         <th>Кол-во сотрудников</th>
                         <th>Адрес</th>
                     </tr>
                 </thead>
                 <tbody>
-                {companyRedux.length && companyRedux.map((el) => (
-                    <Inpit key={el.id} nameType = {'company'} row0={el.id} row1={el.nameCompany} row2={0} row3={el.adressCompany} />
-                ))}
+                    {companyRedux.length && companyRedux.map((el) => (
+                        <Inpit key={el.id} nameType={'company'} row0={el.id} row1={el.nameCompany} row2={0} row3={el.adressCompany} />
+                    ))}
                 </tbody>
             </table>
         </div>
