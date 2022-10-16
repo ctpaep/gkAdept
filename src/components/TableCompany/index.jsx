@@ -1,19 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectAll } from '../../store/actions'
+import { selectAll, deleteAll } from '../../store/actions'
 import { onDelete } from '../../helpers/editInput'
 import Inpit from '../Inpit'
 
 export default function TableCompany(props) {
     const dispatch = useDispatch()
     const companyRedux = useSelector((store) => store.company)
+    const selectCompany = useSelector((store) => store.selectCompany)
+    const employee = useSelector((store) => store.employee)
+    const [menu, setMenu] = useState(false)
+
+    function employeeCount(idCompany) {
+        let counter = 0
+        employee.map(element => {
+
+            if (element.company_Id === idCompany) {
+                counter = counter + 1
+            };
+
+        })
+        return counter
+    }
+
+    useEffect(() => {
+        if (selectCompany.length > 0) {
+            setMenu(true)
+        } else {
+            setMenu(false)
+        }
+
+    }, [selectCompany])
 
     return (
         <div>
             <table className="table">
                 <thead>
                     <tr>
-                        <th onClick={() => { dispatch(selectAll('company')) }}>Выделить все</th>
+                        {menu ? (
+                            <th>
+                                <div onClick={() => { dispatch(selectAll('company')) }}>Снять выделение</div>
+                                <div onClick={() => { }}>Редактировать </div>
+                                <div onClick={() => { dispatch(deleteAll('company')) }}>Удалить</div>
+                            </th>
+                        ) : (
+                            <th onClick={() => { dispatch(selectAll('company')) }}>Выделить все</th>
+                        )
+                        }
+
                         <th>Название компании</th>
                         <th>Кол-во сотрудников</th>
                         <th>Адрес</th>
@@ -21,7 +55,7 @@ export default function TableCompany(props) {
                 </thead>
                 <tbody>
                     {companyRedux.length && companyRedux.map((el) => (
-                        <Inpit key={el.id} nameType={'company'} row0={el.id} row1={el.nameCompany} row2={0} row3={el.adressCompany} />
+                <Inpit key={el.id} nameType={'company'} row0={el.id} row1={el.nameCompany} row2={employeeCount(el.id)} row3={el.adressCompany} />
                     ))}
                 </tbody>
             </table>

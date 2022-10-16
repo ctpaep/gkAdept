@@ -1,19 +1,40 @@
 import Inpit from '../Inpit'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectAll } from '../../store/actions'
+import { selectAll, deleteAll } from '../../store/actions'
+import { useEffect, useState } from 'react'
 
 export default function TableUser(props) {
+	const [menu, setMenu] = useState(false)
 	const userRedux = useSelector((store) => store.employee)
 	const selectCompany = useSelector((store) => store.selectCompany)
 	const sortArr = selectCompany.sort((a, b) => a - b)
+	const selectUser = useSelector((store) => store.selectUser)
 	const dispatch = useDispatch()
+	
+	useEffect(() => {
+        if (selectUser.length > 0) {
+            setMenu(true)
+        } else {
+            setMenu(false)
+        }
 
+    }, [selectUser])
 	return (
 		<div>
 			<table className="table">
 				<thead>
 					<tr>
-						<th onClick={() => { dispatch(selectAll('employee')) }}>Выделить все</th>
+					{menu ? (
+                            <th>
+                                <div onClick={() => { dispatch(selectAll('employee')) }}>Снять выделение</div>
+                                <div onClick={() => { }}>Редактировать </div>
+                                <div onClick={() => { dispatch(deleteAll('employee'))}}>Удалить</div>
+                            </th>
+                        ) : (
+                            <th onClick={() => { dispatch(selectAll('employee')) }}>Выделить все</th>
+                        )
+                        }
+						
 						<th>Фамилия</th>
 						<th>Имя</th>
 						<th>Должность</th>
