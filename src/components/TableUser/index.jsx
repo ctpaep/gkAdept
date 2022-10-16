@@ -2,6 +2,7 @@ import Inpit from '../Inpit'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAll, deleteAll } from '../../store/actions'
 import { useEffect, useState } from 'react'
+import { onUpdate, onDelete } from '../../helpers/editInput'
 
 export default function TableUser(props) {
 	const [menu, setMenu] = useState(false)
@@ -28,7 +29,7 @@ export default function TableUser(props) {
                             <th>
                                 <div onClick={() => { dispatch(selectAll('employee')) }}>Снять выделение</div>
                                 <div onClick={() => { }}>Редактировать </div>
-                                <div onClick={() => { dispatch(deleteAll('employee'))}}>Удалить</div>
+                                <div onClick={() => { dispatch(deleteAll('employee', onDelete(selectUser, userRedux)))}}>Удалить</div>
                             </th>
                         ) : (
                             <th onClick={() => { dispatch(selectAll('employee')) }}>Выделить все</th>

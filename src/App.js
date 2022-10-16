@@ -10,7 +10,7 @@ function App() {
     <div className="container">
       <div className="row"><Company props={{ onUpdate, onDelete }} /></div>
       {selectCompany.length ? (
-        <div className="row"><Employee props={{ onUpdate, onDelete }} /></div>
+        <div className="row"><Employee props={{ onUpdate }} /></div>
       ) : (
         <></>
       )}

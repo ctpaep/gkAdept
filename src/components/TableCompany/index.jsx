@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAll, deleteAll } from '../../store/actions'
-import { onDelete } from '../../helpers/editInput'
+import { onUpdate, onDelete } from '../../helpers/editInput'
 import Inpit from '../Inpit'
 
 export default function TableCompany(props) {
@@ -40,8 +40,8 @@ export default function TableCompany(props) {
                         {menu ? (
                             <th>
                                 <div onClick={() => { dispatch(selectAll('company')) }}>Снять выделение</div>
-                                <div onClick={() => { }}>Редактировать </div>
-                                <div onClick={() => { dispatch(deleteAll('company')) }}>Удалить</div>
+                                <div onClick={() => { onUpdate('company', selectCompany, companyRedux )}}>Редактировать </div>
+                                <div onClick={() => { dispatch(deleteAll('company', onDelete(selectCompany, companyRedux) )) }}>Удалить</div>
                             </th>
                         ) : (
                             <th onClick={() => { dispatch(selectAll('company')) }}>Выделить все</th>

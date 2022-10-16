@@ -43,14 +43,9 @@ export const reducers = (state = initState, action) => {
                 return { ...state, [selectNameType]: [] };
             }
 
-            case tableTypes.DELETE_ALL:
-                state[selectNameType].map((elem) =>{
-                    console.log("selectNameType", selectNameType, elem);
-                    const deleteInput = state[nameType].filter(el => el.id !== elem);
-                    console.log('deleteInput: ', deleteInput);
-
-                    return { ...state, [nameType]: deleteInput  };
-                })
+        case tableTypes.DELETE_ALL:
+            return { ...state, [nameType]: action.payload.newArr, [selectNameType]: [] };
+            
 
         default:
             return state;
