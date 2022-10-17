@@ -59,6 +59,7 @@ export default function TableCompany(props) {
                     ))}
                 </tbody>
             </table>
+           
         </div>
     )
 }

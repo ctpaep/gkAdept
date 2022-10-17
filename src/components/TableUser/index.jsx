@@ -1,4 +1,5 @@
 import Inpit from '../Inpit'
+import EditInput from '../EditInput'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAll, deleteAll } from '../../store/actions'
 import { useEffect, useState } from 'react'
@@ -46,6 +47,7 @@ export default function TableUser(props) {
 						sortArr.map((element) => {
 							if (el.company_Id === element) {
 								return <Inpit key={el.company_Id} nameType={'employee'} row0={el.id} row1={el.last_name} row2={el.first_name} row3={el.position} />
+								// return <EditInput key={el.company_Id} nameType={'employee'} row0={el.id} row1={el.last_name} row2={el.first_name} row3={el.position} />
 							}
 						})
 					))}
