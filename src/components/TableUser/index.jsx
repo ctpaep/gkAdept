@@ -69,7 +69,7 @@ export default function TableUser(props) {
 				</tbody>
 			</table>
 			<button className='btnAdd' onClick={() => { setButtonAdd(false) }} type="button">Добавить сотрудника</button>
-			{!buttonAdd &&
+			{!buttonAdd && 
 				<form className="FormAdd">
 					<span>
 						<label> Фамилия:
