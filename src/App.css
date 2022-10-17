@@ -45,6 +45,16 @@
   border-radius: 0 8px 8px 0;
 }
 
+.FormAdd {
+margin-top: 30px;
+padding-bottom: 30px;
+}
+
+.btnAdd {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
 
 .App-header {
   background-color: #282c34;

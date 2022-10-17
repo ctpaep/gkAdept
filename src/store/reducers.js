@@ -56,6 +56,11 @@ export const reducers = (state = initState, action) => {
                 }) };
             
 
+        case tableTypes.ADD_INPUT:
+        console.log('add input', action.payload.object);    
+        return { ...state, [nameType]: [action.payload.object, ...state[nameType]]}
+        
+
         default:
             return state;
     }
